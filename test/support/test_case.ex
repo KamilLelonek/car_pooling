@@ -1,6 +1,9 @@
 defmodule CarPooling.TestCase do
   use ExUnit.CaseTemplate
 
+  alias CarPooling.Domain.Repo
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       use Phoenix.ConnTest
@@ -14,10 +17,10 @@ defmodule CarPooling.TestCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CarPooling.Domain.Repo)
+    :ok = Sandbox.checkout(Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(CarPooling.Domain.Repo, {:shared, self()})
+      Sandbox.mode(Repo, {:shared, self()})
     end
 
     :ok
