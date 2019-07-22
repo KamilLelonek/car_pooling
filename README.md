@@ -52,7 +52,7 @@ Responses:
 ### PUT /cars
 
 Load the list of available cars in the service and remove all previous data
-(existing journeys and cars). This method may be called more than once during 
+(existing journeys and cars). This method may be called more than once during
 the life cycle of the service.
 
 **Body** _required_ The list of cars to load.
@@ -153,3 +153,13 @@ dependencies, but please document these decisions using MRs or in this very
 README adding sections to it, the same way you would be generating
 documentation for any other deliverable. We want to see how you operate in a
 quasi real work environment.
+
+## Installation
+
+To start your Phoenix server:
+
+  * Install dependencies with `mix deps.get`
+  * Create and migrate your database with `mix ecto.setup`
+  * Start Phoenix endpoint with `mix phx.server`
+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
