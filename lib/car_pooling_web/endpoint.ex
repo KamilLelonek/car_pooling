@@ -1,6 +1,8 @@
 defmodule CarPoolingWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :car_pooling
 
+  plug CarPoolingWeb.Plug.Healthcheck
+
   plug Plug.Static,
     at: "/",
     from: :car_pooling,
