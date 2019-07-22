@@ -23,7 +23,7 @@ defmodule CarPooling.TestCase do
       Sandbox.mode(Repo, {:shared, self()})
     end
 
-    :ok
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
   def errors_on(changeset) do
