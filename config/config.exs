@@ -7,7 +7,7 @@ config :car_pooling,
 config :car_pooling, CarPoolingWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "jQuADUDDxCN02g+s9CD2Cxp2WDMRgj9HBMW8a9oUb2+laDKhaU2k+M0KvVk7uQ+y",
-  render_errors: [view: CarPoolingWeb.ErrorView, accepts: ~w(json)],
+  render_errors: [view: CarPoolingWeb.Errors.View, accepts: ~w(json)],
   check_origin: false,
   pubsub: [name: CarPooling.PubSub, adapter: Phoenix.PubSub.PG2]
 
