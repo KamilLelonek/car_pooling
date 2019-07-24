@@ -1,7 +1,7 @@
 defmodule CarPooling.Domain.CarTest do
   use CarPooling.TestCase, async: true
 
-  alias CarPooling.Domain.Car
+  alias CarPooling.Domain.{Car, ErrorTranslator}
 
   describe "upload/1" do
     test "should insert all Cars" do
@@ -37,7 +37,7 @@ defmodule CarPooling.Domain.CarTest do
 
       assert {:error, {:car, "a"}, changeset, %{}} = Car.upload(cars)
 
-      assert %{id: ["is invalid"]} == errors_on(changeset)
+      assert %{id: ["is invalid"]} == ErrorTranslator.call(changeset)
     end
 
     test "should not instert Car with invalid seats" do
@@ -45,7 +45,7 @@ defmodule CarPooling.Domain.CarTest do
 
       assert {:error, {:car, 1}, changeset, %{}} = Car.upload(cars)
 
-      assert %{seats: ["must be greater than 0"]} == errors_on(changeset)
+      assert %{seats: ["must be greater than 0"]} == ErrorTranslator.call(changeset)
     end
 
     test "should not instert Car with missing ID" do
@@ -53,7 +53,7 @@ defmodule CarPooling.Domain.CarTest do
 
       assert {:error, {:car, nil}, changeset, %{}} = Car.upload(cars)
 
-      assert %{id: ["can't be blank"]} == errors_on(changeset)
+      assert %{id: ["can't be blank"]} == ErrorTranslator.call(changeset)
     end
 
     test "should not instert Car with missing seats" do
@@ -61,7 +61,7 @@ defmodule CarPooling.Domain.CarTest do
 
       assert {:error, {:car, 2}, changeset, %{}} = Car.upload(cars)
 
-      assert %{seats: ["can't be blank"]} == errors_on(changeset)
+      assert %{seats: ["can't be blank"]} == ErrorTranslator.call(changeset)
     end
   end
 end
