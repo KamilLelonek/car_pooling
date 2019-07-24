@@ -9,7 +9,9 @@ defmodule CarPoolingWeb.Router do
 
   get("/", EndpointsController, :index, as: :endpoints)
 
-  scope "/api", CarPoolingWeb do
+  scope "/", CarPoolingWeb do
     pipe_through :api
+
+    put("/cars", Car.Controller, :upload, as: :cars)
   end
 end

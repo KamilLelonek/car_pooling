@@ -24,6 +24,10 @@ defmodule CarPoolingWeb.Endpoints.ControllerTest do
       %{
         "endpoints" => "#{url()}/",
         "method" => "get"
+      },
+      %{
+        "cars" => "#{url()}/cars",
+        "method" => "put"
       }
     ]
   end
