@@ -11,7 +11,7 @@ defmodule CarPooling.Domain.Car.Mutator do
   defp multi_insert_one(car, multi) do
     Multi.insert(
       multi,
-      {:car, car["id"]},
+      {:car, car["id"], Ecto.UUID.generate()},
       Changeset.build(car)
     )
   end
