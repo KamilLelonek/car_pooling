@@ -7,3 +7,5 @@ config :car_pooling, CarPooling.Domain.Repo,
 config :car_pooling, CarPoolingWeb.Endpoint,
   http: [port: 4002],
   server: false
+
+config :logger, level: :warn
