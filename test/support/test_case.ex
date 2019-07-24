@@ -35,4 +35,10 @@ defmodule CarPooling.TestCase do
       end)
     end)
   end
+
+  def read_fixture(entity, name, format \\ :strings) do
+    "test/support/fixtures/#{entity}/#{name}.json"
+    |> File.read!()
+    |> Jason.decode!(keys: format)
+  end
 end
