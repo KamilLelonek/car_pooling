@@ -11,5 +11,6 @@ defmodule CarPooling.Domain.Car.Changeset do
     |> cast(params, @params_required ++ @params_optional)
     |> validate_required(@params_required)
     |> validate_number(:seats, greater_than: 0)
+    |> unique_constraint(:id, name: :cars_pkey)
   end
 end
