@@ -39,4 +39,13 @@ defmodule CarPooling.Domain.Journey.MutatorTest do
       assert %{id: ["can't be blank"]} == ErrorTranslator.call(changeset)
     end
   end
+
+  describe "assign_car/2" do
+    test "should assign a Car to a Journey" do
+      car = Factory.insert(:car)
+      journey = Factory.insert(:journey)
+
+      assert {:ok, car} = Mutator.assign_car(journey, car) |> IO.inspect()
+    end
+  end
 end
