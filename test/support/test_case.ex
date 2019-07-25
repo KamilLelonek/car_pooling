@@ -9,6 +9,7 @@ defmodule CarPooling.TestCase do
       use Phoenix.ConnTest
 
       alias CarPoolingWeb.Router.Helpers, as: Routes
+      alias CarPooling.Factory
 
       @endpoint CarPoolingWeb.Endpoint
 
