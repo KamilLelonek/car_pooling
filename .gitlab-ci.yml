@@ -4,28 +4,28 @@ stages:
   - docker
   - acceptance
 
-remove_me:
+build:
   stage: build
+
+  image: trenpixster/elixir:latest
+
+  services:
+    - postgres:latest
+
+  variables:
+    POSTGRES_DB: test_test
+    POSTGRES_HOST: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: "postgres"
+    MIX_ENV: "test"
+
+  before_script:
+    - apt-get update && apt-get -y install postgresql-client
+    - mix deps.get
+    - mix ecto.setup
+
   script:
-  - >
-     echo If you can see this you know that gitlab-ci is running.  You should
-     uncomment the sections that enable building the docker image and running
-     the accepance tests.
-     Change any file as necessary to make tests pass in your language of
-     choice.  But be mindful that we will only accept challenges that are
-     passing acceptance.  Good luck!
-
-## Uncomment the following sections to enable docker, image building and acceptance
-
-# build:
-#   stage: build
-#   image: # Add an image to build your service
-#   artifacts:
-#     paths:
-#       - bin/
-#   script:
-#     - echo do something to build the binary or whatever
-
+    - mix test
 # build_image:
 #   stage: docker
 #   image: docker:latest
@@ -47,7 +47,7 @@ remove_me:
 # acceptance:
 #   image: cabify/challenge:latest
 #   stage: acceptance
-#   only: 
+#   only:
 #     - master
 #   dependencies: []
 #   services:
