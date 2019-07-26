@@ -6,6 +6,4 @@ config :car_pooling, CarPoolingWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true
 
-config :car_pooling, CarPooling.Domain.Repo,
-  url: System.get_env("DB_URL"),
-  pool_size: "DB_POOL_SIZE" |> System.get_env() |> String.to_integer()
+config :car_pooling, CarPooling.Domain.Repo, load_from_system_env: true
