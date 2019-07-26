@@ -7,7 +7,7 @@ stages:
 build:
   stage: build
 
-  image: trenpixster/elixir:latest
+  image: elixir:1.9
 
   services:
     - postgres:latest
@@ -21,11 +21,11 @@ build:
 
   before_script:
     - apt-get update && apt-get -y install postgresql-client
-    - mix deps.get
-    - mix ecto.setup
+    - ./scripts/init.sh
 
   script:
-    - mix test
+    - ./scripts/lint.sh
+    - ./scripts/test.sh
 # build_image:
 #   stage: docker
 #   image: docker:latest
