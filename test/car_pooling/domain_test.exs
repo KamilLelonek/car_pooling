@@ -17,4 +17,18 @@ defmodule CarPooling.DomainTest do
                Domain.upload_cars(cars)
     end
   end
+
+  describe "request_journey/1" do
+    test "should request Journey" do
+      journey = read_fixture(:journeys, "valid")
+
+      assert :ok = Domain.request_journey(journey)
+    end
+
+    test "should not request Journey and return an error" do
+      journey = read_fixture(:journeys, "missing_people")
+
+      assert {:error, %{fields: %{people: ["can't be blank"]}}} = Domain.request_journey(journey)
+    end
+  end
 end
