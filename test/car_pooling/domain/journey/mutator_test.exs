@@ -45,8 +45,7 @@ defmodule CarPooling.Domain.Journey.MutatorTest do
       car = Factory.insert(:car)
       journey = Factory.insert(:journey)
 
-      assert {:ok, %{car_id: car_id, car: %{id: car_id}}} =
-               Mutator.assign_car(journey, car)
+      assert {:ok, %{car_id: car_id, car: %{id: car_id}}} = Mutator.assign_car(journey, car)
     end
   end
 end

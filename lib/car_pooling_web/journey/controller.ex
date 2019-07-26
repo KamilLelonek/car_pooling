@@ -4,9 +4,8 @@ defmodule CarPoolingWeb.Journey.Controller do
   alias CarPooling.Domain
 
   def request(conn, params) do
-    with :ok <- Domain.request_journey(params) do
-      send_text(conn, :ok)
-    else
+    case Domain.request_journey(params) do
+      :ok -> send_text(conn, :ok)
       _ -> send_text(conn, :bad_request)
     end
   end
