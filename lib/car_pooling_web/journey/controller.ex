@@ -10,6 +10,10 @@ defmodule CarPoolingWeb.Journey.Controller do
     end
   end
 
+  def locate(conn, params) do
+    send_text(conn, :ok)
+  end
+
   defp send_text(conn, status) do
     conn
     |> put_status(status)
