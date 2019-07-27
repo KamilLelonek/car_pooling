@@ -3,6 +3,8 @@ defmodule CarPooling.Domain.Car.Schema do
 
   alias CarPooling.Domain.Journey.Schema, as: Journey
 
+  @derive {Jason.Encoder, only: [:id, :seats]}
+
   schema "cars" do
     field :seats, :integer
 
