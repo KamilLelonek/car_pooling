@@ -1,33 +1,29 @@
 ---
 stages:
-  - build
+  - test
   - docker
   - acceptance
 
-build:
-  stage: build
-
+test:
+  stage: test
   image: elixir:1.9
-
   services:
-    - postgres:latest
-
+    - name: postgres:latest
+      alias: postgres-test
   variables:
-    POSTGRES_DB: test_test
+    POSTGRES_DB: database
     POSTGRES_HOST: postgres
     POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: "postgres"
-    MIX_ENV: "test"
-
+    POSTGRES_PASSWORD: postgres
+    MIX_ENV: test
   before_script:
     - apt-get update && apt-get -y install postgresql-client
     - ./scripts/init.sh
-
   script:
     - ./scripts/lint.sh
     - ./scripts/test.sh
 
-build_image:
+docker:
   stage: docker
   image: docker:stable
   variables:
@@ -48,9 +44,11 @@ acceptance:
   stage: acceptance
   only:
     - master
-  dependencies: []
+  variables:
+    POSTGRES_URL: postgres://puezvkdc:1QvjWdUoJHnXhShV7jgI1p7nXwlilIWn@raja.db.elephantsql.com:5432/puezvkdc
+    PORT: "9091"
   services:
     - name: ${CI_REGISTRY_IMAGE}:latest
       alias: pooling
   script:
-    - /harness --address http://pooling:9091 acceptance
+    - /harness --address http://pooling:${PORT} acceptance

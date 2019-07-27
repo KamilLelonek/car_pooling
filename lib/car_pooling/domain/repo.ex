@@ -17,10 +17,10 @@ defmodule CarPooling.Domain.Repo do
 
   defp system_config do
     [
-      url: System.get_env("DB_URL"),
-      pool_size: "DB_POOL_SIZE" |> System.get_env() |> String.to_integer()
+      url: System.get_env("POSTGRES_URL")
     ]
   end
 
-  defp load_from_system_env?, do: Application.get_env(:car_pooling, CarPooling.Domain.Repo)
+  defp load_from_system_env?,
+    do: Application.get_env(:car_pooling, CarPooling.Domain.Repo)[:load_from_system_env]
 end
