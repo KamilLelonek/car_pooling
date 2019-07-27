@@ -1,5 +1,6 @@
 defmodule CarPoolingWeb.Router do
   use Phoenix.Router
+  use Plug.ErrorHandler
 
   alias CarPoolingWeb.Endpoints.Controller, as: EndpointsController
 
