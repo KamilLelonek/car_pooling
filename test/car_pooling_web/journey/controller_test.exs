@@ -79,4 +79,37 @@ defmodule CarPoolingWeb.Journey.ControllerTest do
       end
     end
   end
+
+  describe "POST /dropoff" do
+    test "should dropoff a Journey and render 200", %{conn: conn} do
+      journey = read_fixture(:journeys, "valid")
+
+      post(conn, Routes.journeys_path(conn, :request), journey)
+
+      assert conn
+             |> put_req_header("content-type", "application/x-www-form-urlencoded")
+             |> post(Routes.journeys_path(conn, :dropoff), %{"ID" => 1})
+             |> response(:ok)
+    end
+
+    test "should dropoff a Journey and render 404", %{conn: conn} do
+      assert conn
+             |> put_req_header("content-type", "application/x-www-form-urlencoded")
+             |> post(Routes.journeys_path(conn, :dropoff), %{"ID" => 1})
+             |> response(:not_found)
+    end
+
+    test "should dropoff a Journey and render 400", %{conn: conn} do
+      assert conn
+             |> put_req_header("content-type", "application/x-www-form-urlencoded")
+             |> post(Routes.journeys_path(conn, :dropoff), %{"id" => "1"})
+             |> response(:bad_request)
+
+      assert_error_sent :bad_request, fn ->
+        conn
+        |> put_req_header("content-type", "application/x-www-form-urlencoded")
+        |> post(Routes.journeys_path(conn, :dropoff), %{"ID" => "a"})
+      end
+    end
+  end
 end
