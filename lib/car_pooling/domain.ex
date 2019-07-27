@@ -20,4 +20,14 @@ defmodule CarPooling.Domain do
         {:error, %{fields: ErrorTranslator.call(changeset)}}
     end
   end
+
+  def find_journey(params) do
+    with %{"ID" => id} <- params,
+         journey when not is_nil(journey) <- Journey.one(id) do
+      {:ok, journey}
+    else
+      nil -> {:error, :not_found}
+      _ -> {:error, :invalid_params}
+    end
+  end
 end

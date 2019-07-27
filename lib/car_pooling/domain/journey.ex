@@ -1,12 +1,15 @@
 defmodule CarPooling.Domain.Journey do
   alias CarPooling.Domain.Journey.Mutator
-  alias CarPooling.Domain.Car.Loader
+  alias CarPooling.Domain.Journey.Loader, as: JourneyLoader
+  alias CarPooling.Domain.Car.Loader, as: CarLoader
+
+  defdelegate one(id), to: JourneyLoader
 
   def request(params) do
     case Mutator.create(params) do
       {:ok, %{people: people} = journey} ->
         people
-        |> Loader.by_seats()
+        |> CarLoader.by_seats()
         |> maybe_assign_car(journey)
 
       error ->

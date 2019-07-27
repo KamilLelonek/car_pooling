@@ -31,4 +31,34 @@ defmodule CarPooling.DomainTest do
       assert {:error, %{fields: %{people: ["can't be blank"]}}} = Domain.request_journey(journey)
     end
   end
+
+  describe "find_journey/1" do
+    test "should find a Journey withouth a Car assigned" do
+      :journeys
+      |> read_fixture("valid")
+      |> Domain.request_journey()
+
+      assert {:ok, %{id: 1, car: nil, car_id: nil}} = Domain.find_journey(%{"ID" => 1})
+    end
+
+    test "should find a Journey with a Car assigned" do
+      cars = read_fixture(:cars, "valid")
+      journey = read_fixture(:journeys, "valid")
+
+      Domain.upload_cars(cars)
+      Domain.request_journey(journey)
+
+      assert {:ok, %{id: 1, people: 4, car: %{seats: 4}, car_id: 1}} =
+               Domain.find_journey(%{"ID" => 1})
+    end
+
+    test "should not find any Journey" do
+      assert {:error, :not_found} == Domain.find_journey(%{"ID" => 1})
+    end
+
+    test "should not find any Journey and return an error" do
+      assert {:error, :invalid_params} == Domain.find_journey(%{"id" => 1})
+      assert_raise Ecto.Query.CastError, fn -> Domain.find_journey(%{"ID" => "a"}) end
+    end
+  end
 end
