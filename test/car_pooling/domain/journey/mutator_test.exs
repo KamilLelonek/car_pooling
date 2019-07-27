@@ -48,4 +48,25 @@ defmodule CarPooling.Domain.Journey.MutatorTest do
       assert {:ok, %{car_id: car_id, car: %{id: car_id}}} = Mutator.assign_car(journey, car)
     end
   end
+
+  describe "delete/1" do
+    test "should delete a Journey without a Car" do
+      %{id: id} = Factory.insert(:journey)
+
+      assert {1, nil} = Mutator.delete(id)
+    end
+
+    test "should delete a Journey with a Car" do
+      car = Factory.insert(:car)
+      journey = %{id: id} = Factory.insert(:journey)
+
+      Mutator.assign_car(journey, car)
+
+      assert {1, nil} = Mutator.delete(id)
+    end
+
+    test "should not delete a Journey" do
+      assert {0, nil} = Mutator.delete(1)
+    end
+  end
 end
