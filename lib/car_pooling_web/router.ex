@@ -16,5 +16,6 @@ defmodule CarPoolingWeb.Router do
     put("/cars", Car.Controller, :upload, as: :cars)
     post("/journey", Journey.Controller, :request, as: :journeys)
     post("/locate", Journey.Controller, :locate, as: :journeys)
+    post("/dropoff", Journey.Controller, :dropoff, as: :journeys)
   end
 end
