@@ -5,9 +5,9 @@ defmodule CarPoolingWeb.Endpoints.ControllerTest do
   alias Phoenix.Router.Helpers
 
   test "GET /whatever should return error page", %{conn: conn} do
-    assert_raise Phoenix.Router.NoRouteError, fn ->
-      get(conn, "/whatever")
-    end
+    assert conn
+           |> get("/whatever")
+           |> response(:method_not_allowed)
   end
 
   test "GET / should return current endpoints", %{conn: conn} do

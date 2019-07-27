@@ -18,4 +18,6 @@ defmodule CarPoolingWeb.Router do
     post("/locate", Journey.Controller, :locate, as: :journeys)
     post("/dropoff", Journey.Controller, :dropoff, as: :journeys)
   end
+
+  match :*, "/:all", CarPoolingWeb.Errors.Controller, :method_not_allowed
 end
