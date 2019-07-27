@@ -61,4 +61,33 @@ defmodule CarPooling.DomainTest do
       assert_raise Ecto.Query.CastError, fn -> Domain.find_journey(%{"ID" => "a"}) end
     end
   end
+
+  describe "dropoff_journey/1" do
+    test "should not dropoff any Journey" do
+      assert {:error, :not_found} = Domain.dropoff_journey(%{"ID" => 1})
+    end
+
+    test "should not dropoff any Journey and return an error" do
+      assert {:error, :invalid_params} == Domain.dropoff_journey(%{"id" => 1})
+      assert_raise Ecto.Query.CastError, fn -> Domain.dropoff_journey(%{"ID" => "a"}) end
+    end
+
+    test "should dropoff a Journey without a Car" do
+      :journeys
+      |> read_fixture("valid")
+      |> Domain.request_journey()
+
+      assert :ok = Domain.dropoff_journey(%{"ID" => 1})
+    end
+
+    test "should dropoff a Journey with a Car" do
+      cars = read_fixture(:cars, "valid")
+      journey = read_fixture(:journeys, "valid")
+
+      Domain.upload_cars(cars)
+      Domain.request_journey(journey)
+
+      assert :ok = Domain.dropoff_journey(%{"ID" => 1})
+    end
+  end
 end

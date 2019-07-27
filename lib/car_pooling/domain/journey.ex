@@ -4,6 +4,7 @@ defmodule CarPooling.Domain.Journey do
   alias CarPooling.Domain.Car.Loader, as: CarLoader
 
   defdelegate one(id), to: JourneyLoader
+  defdelegate delete(id), to: Mutator
 
   def request(params) do
     case Mutator.create(params) do

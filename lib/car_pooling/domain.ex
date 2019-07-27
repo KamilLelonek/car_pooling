@@ -30,4 +30,14 @@ defmodule CarPooling.Domain do
       _ -> {:error, :invalid_params}
     end
   end
+
+  def dropoff_journey(params) do
+    with %{"ID" => id} <- params,
+         {1, nil} <- Journey.delete(id) do
+      :ok
+    else
+      {0, nil} -> {:error, :not_found}
+      _ -> {:error, :invalid_params}
+    end
+  end
 end
