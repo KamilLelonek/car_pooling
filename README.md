@@ -185,3 +185,28 @@ To start the application Phoenix server, run:
     mix phx.server
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Production
+
+To prepare you application for production, you can use [`Dockerfile`](Dockerfile) for that. It will require you have [`Docker` installed locally](https://docs.docker.com/install/).
+
+To build a `Docker` image, execute the following command:
+
+    docker build . -t car_pooling:latest
+
+Once built, you are able to push it to a remote repository as:
+
+    docker push car_pooling:latest
+
+It assumes you are authorized and logged in to a [`Docker` registry](https://docs.docker.com/registry/).
+
+### Platform as a Service
+
+From the deployment options, you can choose for example:
+
+- [Heroku](https://devcenter.heroku.com/articles/container-registry-and-runtime)
+- [Gigalixir](https://gigalixir.readthedocs.io/en/latest/main.html#deploy)
+- [Google Cloud Platform](https://cloud.google.com/elixir/)
+- [Render](https://render.com/docs/deploy-phoenix)
+
+Depending on your needs and complexity of your application.
