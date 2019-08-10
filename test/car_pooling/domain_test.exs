@@ -10,6 +10,16 @@ defmodule CarPooling.DomainTest do
       assert :ok = Domain.upload_cars(cars)
     end
 
+    test "should upload Cars even with Journey assigned" do
+      cars = read_fixture(:cars, "valid")
+      journey = read_fixture(:journeys, "valid")
+
+      Domain.upload_cars(cars)
+      Domain.request_journey(journey)
+
+      assert :ok = Domain.upload_cars(cars)
+    end
+
     test "should not upload Cars and return an error" do
       cars = read_fixture(:cars, "duplicated_id")
 
