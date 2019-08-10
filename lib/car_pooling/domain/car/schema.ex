@@ -1,4 +1,9 @@
 defmodule CarPooling.Domain.Car.Schema do
+  @moduledoc """
+  Car entity representation
+  and schema definition module.
+  """
+
   use Ecto.Schema
 
   alias CarPooling.Domain.Journey.Schema, as: Journey

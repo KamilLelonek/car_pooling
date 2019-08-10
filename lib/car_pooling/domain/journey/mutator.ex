@@ -1,4 +1,8 @@
 defmodule CarPooling.Domain.Journey.Mutator do
+  @moduledoc """
+  The Commands part of Journey CQRS model.
+  """
+
   alias CarPooling.Domain.{Journey.Changeset, Repo}
   alias CarPooling.Domain.Journey.Schema, as: Journey
 

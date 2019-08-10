@@ -1,4 +1,8 @@
 defmodule CarPooling.Domain.Car.Mutator do
+  @moduledoc """
+  The Commands part of Car CQRS model.
+  """
+
   alias CarPooling.Domain.Car.{Changeset, Schema}
   alias Ecto.Multi
 

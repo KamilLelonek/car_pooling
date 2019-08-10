@@ -1,4 +1,8 @@
 defmodule CarPooling.Domain.Journey.Changeset do
+  @moduledoc """
+  Journey schema validation module.
+  """
+
   import Ecto.Changeset
 
   alias CarPooling.Domain.Journey.Schema

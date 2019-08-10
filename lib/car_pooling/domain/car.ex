@@ -1,4 +1,8 @@
 defmodule CarPooling.Domain.Car do
+  @moduledoc """
+  An entry point for CarPooling.Domain to manage Cars.
+  """
+
   alias CarPooling.Domain.{Repo, Car.Mutator}
   alias Ecto.Multi
 

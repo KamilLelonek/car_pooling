@@ -1,4 +1,10 @@
 defmodule CarPoolingWeb.Plug.Healthcheck do
+  @moduledoc """
+  Application status healthcheck
+  available as liviness probe
+  under /status endpoint.
+  """
+
   import Plug.Conn
 
   def init(opts), do: opts

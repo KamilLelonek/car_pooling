@@ -1,4 +1,8 @@
 defmodule CarPooling.Domain.Journey do
+  @moduledoc """
+  An entry point for CarPooling.Domain to manage Journeys.
+  """
+
   alias CarPooling.Domain.Journey.Mutator
   alias CarPooling.Domain.Journey.Loader, as: JourneyLoader
   alias CarPooling.Domain.Car.Loader, as: CarLoader

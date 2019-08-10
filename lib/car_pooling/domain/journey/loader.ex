@@ -1,4 +1,8 @@
 defmodule CarPooling.Domain.Journey.Loader do
+  @moduledoc """
+  The Queries part of Journey CQRS model.
+  """
+
   alias CarPooling.Domain.Repo
   alias CarPooling.Domain.Journey.Schema, as: Journey
 

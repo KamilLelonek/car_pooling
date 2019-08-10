@@ -1,4 +1,11 @@
 defmodule CarPooling.Domain do
+  @moduledoc """
+  An entry point for CarPoolingWeb to manage Journeys and Cars.
+
+  A general interface to be used from API perspective
+  to interact with database and business domain logic.
+  """
+
   alias CarPooling.Domain.{Car, Journey, ErrorTranslator}
 
   def upload_cars(cars) do
