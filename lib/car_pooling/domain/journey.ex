@@ -18,6 +18,6 @@ defmodule CarPooling.Domain.Journey do
     end
   end
 
-  defp maybe_assign_car([car | _], journey), do: Mutator.assign_car(journey, car)
-  defp maybe_assign_car([], journey), do: {:ok, journey}
+  defp maybe_assign_car(nil, journey), do: {:ok, journey}
+  defp maybe_assign_car(car, journey), do: Mutator.assign_car(journey, car)
 end
