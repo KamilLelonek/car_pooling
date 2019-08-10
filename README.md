@@ -156,10 +156,32 @@ quasi real work environment.
 
 ## Installation
 
-To start your Phoenix server:
+### Language & Libraries
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+First of all, make sure you have Elixir installed by covering the official [installation guide](https://elixir-lang.org/install.html) on your machine. Alternatively, you can use [`asdf`](https://github.com/asdf-vm/asdf) tool and leverage [`.tool-versions`](.tool-versions) file to pick the right version of [Elixir](https://github.com/asdf-vm/asdf-elixir) and [Erlang](https://github.com/asdf-vm/asdf-erlang) plugins.
+
+Once you have it, you can install and compile all dependencies by running:
+
+    mix do deps.get, deps.compile
+
+Finally, you are able to build the project itself like:
+
+    mix compile
+
+### Database
+
+Ensure you have `PostgreSQL` available on your machine. You can use either a [local installation](https://www.postgresql.org/download/) or a [Docker distribution](https://docs.docker.com/engine/examples/postgresql_service/).
+
+The application requires to have a user (role) `postgres` created with the same password on your `localhost` under `5432` port.
+
+Later on, create and migrate your database with
+
+    mix ecto.setup
+
+### Server
+
+To start the application Phoenix server, run:
+
+    mix phx.server
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
